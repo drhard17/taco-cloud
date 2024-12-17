@@ -1,6 +1,10 @@
 package tacos;
 
 import java.util.List;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+
 import java.util.Date;
 
 import jakarta.validation.constraints.Digits;
@@ -12,11 +16,15 @@ import java.util.ArrayList;
 import lombok.Data;
 
 @Data
+@Table
 public class TacoOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @Id
     private long id;
-    private Date placedAt;
+    
+    private Date placedAt = new Date();
 
     @NotBlank(message = "Delivery name is required")
     private String deliveryName;

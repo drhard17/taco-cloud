@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
-public class User implements UserDetails {
+public class MyUser implements UserDetails {
     
     private static final long serialVersionUID = 1L;
 

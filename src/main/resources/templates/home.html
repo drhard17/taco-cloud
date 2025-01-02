@@ -9,4 +9,9 @@
         <h1>Welcome to Taco!</h1>
         <img th:src="@{/images/TacoCloud.jpg}"/>
     </body>
+
+    <form method="POST" th:action="@{/logout}" id="logoutForm">
+        <input type="submit" value="Logout"/>
+    </form>
+
 </html>

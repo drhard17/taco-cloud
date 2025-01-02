@@ -1,5 +1,6 @@
 package tacos.web;
 
+import java.security.Principal;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -16,8 +17,10 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import tacos.TacoOrder;
 import tacos.Ingredient;
+import tacos.MyUser;
 import tacos.Ingredient.Type;
 import tacos.data.IngredientRepository;
+import tacos.data.UserRepository;
 import tacos.Taco;
 
 @Slf4j
@@ -27,9 +30,11 @@ import tacos.Taco;
 public class DesignTacoController {
 
     private final IngredientRepository ingredientRepo;
+    private final UserRepository userRepo;
 
-    public DesignTacoController(IngredientRepository ingredientRepo) {
+    public DesignTacoController(IngredientRepository ingredientRepo, UserRepository userRepo) {
         this.ingredientRepo = ingredientRepo;
+        this.userRepo = userRepo;
     }
 
     @ModelAttribute
@@ -52,6 +57,13 @@ public class DesignTacoController {
     @ModelAttribute(name = "taco")
     public Taco taco() {
         return new Taco();
+    }
+
+    @ModelAttribute(name = "user")
+    public MyUser user(Principal principal) {
+        String username = principal.getName();
+        MyUser user = userRepo.findByUsername(username);
+        return user;
     }
 
     @GetMapping
